@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+import img from './images/bg-main-desktop.png'
+import GlobalStyle from "./styles/global";
+import Content from "./components/Content";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+const App: React.FC = () => (
+    <Wrapper>
+        <GlobalStyle />
+        <BackgroundImage></BackgroundImage>
+        <Content />
+    </Wrapper>
+)
+
+const Wrapper = styled.div`
+  height: 100vh;
+  position: relative;
+  background-color: var(--color-bg);
+  font-size: 18px;
+  font-family: 'Space Grotesk', sans-serif;
+`
+
+const BackgroundImage = styled.div`
+  background-size: auto;
+  background-image: url(${img});
+  width: 30%;
+  height: 100%;
+`
 
 export default App;
