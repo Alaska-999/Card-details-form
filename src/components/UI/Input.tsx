@@ -8,7 +8,7 @@ interface InputProps {
     placeholder?: string;
     value: string;
     maxLength?: number;
-    minLength?:number
+    minLength?: number
     onBlur?: (e: React.FocusEvent) => void;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -19,8 +19,8 @@ const Input: FC<InputProps> = ({
                                    width,
                                    onChange,
                                    onBlur,
-    maxLength,
-    minLength
+                                   maxLength,
+                                   minLength
                                }) => {
     return (
 

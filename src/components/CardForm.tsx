@@ -135,7 +135,7 @@ const CardForm: FC<FormProps> = ({cardData}) => {
                             />
                         </Label>
                     </Line>
-                    
+
                     <ConfirmBtn type='submit'>Confirm</ConfirmBtn>
                 </Form>
             }
@@ -147,6 +147,14 @@ const CardForm: FC<FormProps> = ({cardData}) => {
 
 const Form = styled.form`
   margin-left: 100px;
+  
+  @media (max-width: 1140px) {
+    margin-left: 100px;
+  }
+
+  @media (max-width: 1024px) {
+    margin-left: 40px;
+  }
 `
 
 const Label = styled.label`

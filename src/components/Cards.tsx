@@ -44,6 +44,21 @@ const FrontCard = styled.div`
   box-shadow: var(--shadow);
   padding: 25px;
   color: #fff;
+  z-index: 10;
+
+  @media (max-width: 930px) {
+    width: 370px;
+    height: 210px;
+    position: relative;
+    top: 210px;
+  }
+
+  @media (max-width: 500px) {
+    width: 340px;
+    height: 195px;
+    position: relative;
+    top: 170px;
+  }
 `
 
 const BackCard = styled.div`
@@ -54,15 +69,39 @@ const BackCard = styled.div`
   border-radius: var(--radii);
   background-size: auto;
   background-image: url(${backCardBackground});
+  background-position: center;
   box-shadow: var(--shadow);
   color: #fff;
+  z-index: 1;
+
+  @media (max-width: 1140px) {
+    margin-left: 0;
+  }
+  
+  @media (max-width: 930px) {
+    width: 370px;
+    height: 210px;
+    position: relative;
+    bottom: 120px;
+    margin-left: 90px;
+  }
+
+  @media (max-width: 500px) {
+    width: 340px;
+    height: 195px;
+    margin-left: 60px;
+    bottom: 120px;
+  }
 `
 
 const UpperRow = styled.div`
   display: flex;
   align-items: center;
   padding-bottom: 55px;
-  //height: 50%;
+
+  @media (max-width: 1140px) {
+    padding-bottom: 40px;
+  }
 `
 
 const LowerRow = styled.div`
@@ -88,6 +127,14 @@ const CardNumber = styled.div`
   font-family: 'Space Grotesk', sans-serif;
   font-size: 24px;
   letter-spacing: 5px;
+
+  @media (max-width: 1140px) {
+    font-size: 20px;
+  }
+  
+  @media (max-width: 930px) {
+    font-size: 16px;
+  }
 `
 
 const CardInfo = styled.div`
@@ -101,7 +148,10 @@ const OwnerName = styled.div`
   font-size: 16px;
   letter-spacing: 2px;
   text-transform: uppercase;
-
+  
+  @media (max-width: 930px) {
+    font-size: 14px;
+  }
 `
 
 const ValidityPeriod = styled.div`
@@ -114,6 +164,17 @@ const CVS = styled.div`
   letter-spacing: 3px;
   padding-top: 110px;
   margin-left: 350px;
+  
+  @media (max-width: 930px) {
+    margin-left: 300px;
+    padding-top: 95px;
+  }
+
+  @media (max-width: 500px) {
+    margin-left: 290px;
+    padding-top: 85px;
+  }
 `
+
 
 export default Cards;
