@@ -44,8 +44,8 @@ const CardForm: FC<FormProps> = ({cardData}) => {
     }
 
     const submitHandler = () => {
-        if(cardNumber !== "0000 0000 0000 0000"
-            && cardMonth !=='00'
+        if (cardNumber !== "0000 0000 0000 0000"
+            && cardMonth !== '00'
             && cardYear !== '00'
             && cardCVS !== '000'
             && cardHolder !== 'Jane Appleseed'
@@ -139,7 +139,7 @@ const CardForm: FC<FormProps> = ({cardData}) => {
                     <ConfirmBtn type='submit'>Confirm</ConfirmBtn>
                 </Form>
             }
-            </div>
+        </div>
 
     );
 
@@ -147,13 +147,17 @@ const CardForm: FC<FormProps> = ({cardData}) => {
 
 const Form = styled.form`
   margin-left: 100px;
-  
+
   @media (max-width: 1140px) {
     margin-left: 100px;
   }
 
   @media (max-width: 1024px) {
     margin-left: 40px;
+  }
+
+  @media (max-width: 930px) {
+    margin-left: 0;
   }
 `
 

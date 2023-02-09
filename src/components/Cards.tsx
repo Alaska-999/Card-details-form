@@ -54,8 +54,8 @@ const FrontCard = styled.div`
   }
 
   @media (max-width: 500px) {
-    width: 340px;
-    height: 195px;
+    width: 330px;
+    height: 190px;
     position: relative;
     top: 170px;
   }
@@ -87,8 +87,8 @@ const BackCard = styled.div`
   }
 
   @media (max-width: 500px) {
-    width: 340px;
-    height: 195px;
+    width: 330px;
+    height: 190px;
     margin-left: 60px;
     bottom: 120px;
   }
@@ -101,6 +101,10 @@ const UpperRow = styled.div`
 
   @media (max-width: 1140px) {
     padding-bottom: 40px;
+  } 
+  
+  @media (max-width: 500px) {
+    padding-bottom: 20px;
   }
 `
 
@@ -171,8 +175,8 @@ const CVS = styled.div`
   }
 
   @media (max-width: 500px) {
-    margin-left: 290px;
-    padding-top: 85px;
+    margin-left: 280px;
+    padding-top: 82px;
   }
 `
 
