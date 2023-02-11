@@ -82,7 +82,7 @@ const CardForm: FC<FormProps> = ({cardData}) => {
                     <Label htmlFor='cardNumber'>CARD NUMBER
                         <Input
                             value={cardNumber}
-                            type='number'
+                            type='text'
                             width='400px'
                             id='cardNumber'
                             placeholder='e.g. 1233 4567 6789 4567'

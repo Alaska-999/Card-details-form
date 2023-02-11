@@ -15,6 +15,7 @@ interface InputProps {
 
 const Input: FC<InputProps> = ({
                                    type,
+
                                    placeholder,
                                    width,
                                    onChange,
