@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, FormEvent, useEffect, useState} from 'react';
 import styled from "styled-components";
 import Input from "./UI/Input";
 import Submitted from "./Submitted";
@@ -26,37 +26,96 @@ const CardForm: FC<FormProps> = ({cardData}) => {
     const [cardYear, setCardYear] = useState<string>('00');
     const [cardCVS, setCardCVS] = useState<string>("000");
 
-    const cardNumberChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault()
-        setCardNumber(e.target.value)
-    }
-    const cardHolderChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault()
-        setCardHolder(e.target.value)
-    }
-    const cardMonthChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault()
-        setCardMonth(e.target.value)
-    }
-    const cardYearChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault()
-        setCardYear(e.target.value)
-    }
-    const cardCVSChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault()
-        setCardCVS(e.target.value)
+    const [errorMessageName, setErrorMessageName] = useState<boolean>(false)
+    const [errorMessageNumber, setErrorMessageNumber] = useState<boolean>(false)
+    const [errorMessageNumberMonth, setErrorMessageNumberMonth] = useState<boolean>(false)
+    const [errorMessageNumberYear, setErrorMessageNumberYear] = useState<boolean>(false)
+    const [errorMessageNumberCVS, setErrorMessageNumberCVS] = useState<boolean>(false)
+
+    const numberFormatCard = (e: any) => {
+        const inputCardNumber = e.target.value
+        const newNumberFormat = inputCardNumber
+            .split('')
+            .map((char: any, index: any) => (index % 4 === 3 ? `${char} ` : char))
+            .join('');
+        setCardNumber(newNumberFormat);
     }
 
-    const submitHandler = () => {
-        if (cardNumber !== "0000 0000 0000 0000"
-            && cardMonth !== '00'
-            && cardYear !== '00'
-            && cardCVS !== '000'
-            && cardHolder !== 'Jane Appleseed'
-        ) {
-            setCardSaved(true)
+    const cardNumberChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.value === '') {
+            setCardNumber('');
         } else {
-            return alert('Inputs cannot be blank')
+            const onlyNumbers = /^[0-9]+$/;
+            if (onlyNumbers.test(e.target.value)) {
+                numberFormatCard(e);
+                setErrorMessageNumber(false);
+            } else {
+                setErrorMessageNumber(true);
+            }
+        }
+    }
+
+    const cardHolderChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.value === '') {
+            setCardHolder('');
+        } else {
+            const onlyLetters = /^[a-zA-Z\s]+$/;
+            if (onlyLetters.test(e.target.value)) {
+                setCardHolder(e.target.value);
+                setErrorMessageName(false)
+            } else {
+                setErrorMessageName(true)
+            }
+        }
+    }
+
+    const cardMonthChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.value === '') {
+            setCardMonth('');
+        } else {
+            const onlyNumbers = /^[0-9]+$/;
+            if (onlyNumbers.test(e.target.value) && parseInt(e.target.value) >= 1 && parseInt(e.target.value) <= 12) {
+                setCardMonth(e.target.value)
+                setErrorMessageNumberMonth(false);
+            } else {
+                setErrorMessageNumberMonth(true);
+            }
+        }
+    }
+
+    const cardYearChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.value === '') {
+            setCardYear('');
+        } else {
+            const onlyNumbers = /^[0-9]+$/;
+            if (onlyNumbers.test(e.target.value) && parseInt(e.target.value) <= 27) {
+                setCardYear(e.target.value)
+                setErrorMessageNumberYear(false);
+            } else {
+                setErrorMessageNumberYear(true);
+            }
+        }
+    }
+
+    const cardCVSChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.value === '') {
+            setCardCVS('');
+        } else {
+            const onlyNumbers = /^[0-9]+$/;
+            if (onlyNumbers.test(e.target.value)) {
+                setCardCVS(e.target.value)
+                setErrorMessageNumberCVS(false);
+            } else {
+                setErrorMessageNumberCVS(true);
+            }
+        }
+    }
+
+    const submitHandler = (e: FormEvent) => {
+
+        e.preventDefault()
+        if (!errorMessageName && !errorMessageNumber && !errorMessageNumberMonth && !errorMessageNumberCVS && !errorMessageNumberYear) {
+            setCardSaved(true)
         }
     }
 
@@ -79,7 +138,12 @@ const CardForm: FC<FormProps> = ({cardData}) => {
                             maxLength={21}
                             minLength={6}
                             onChange={cardHolderChangeHandler}
+                            error={errorMessageName}
+                            required
                         />
+                        {
+                            errorMessageName && <ErrorMessage>Wrong format, only letters</ErrorMessage>
+                        }
 
                     </Label>
 
@@ -93,7 +157,12 @@ const CardForm: FC<FormProps> = ({cardData}) => {
                             maxLength={16}
                             minLength={16}
                             onChange={cardNumberChangeHandler}
+                            error={errorMessageNumber}
+                            required
                         />
+                        {
+                            errorMessageNumber && <ErrorMessage>Wrong format, only numbers</ErrorMessage>
+                        }
                     </Label>
 
                     <Line>
@@ -102,27 +171,40 @@ const CardForm: FC<FormProps> = ({cardData}) => {
                                 <DateInputItem>
                                     <Input
                                         value={cardMonth}
-                                        type='number'
+                                        type='text'
                                         width='90px'
                                         placeholder='MM'
                                         id='expDate'
                                         maxLength={2}
                                         minLength={2}
                                         onChange={cardMonthChangeHandler}
+                                        error={errorMessageNumberMonth}
+                                        required
                                     />
+                                    {
+                                        errorMessageNumberMonth && <ErrorMessage>Wrong format</ErrorMessage>
+                                    }
                                 </DateInputItem>
 
-                                <Input
-                                    value={cardYear}
-                                    type='number'
-                                    width='90px'
-                                    placeholder='YY'
-                                    id='expDate'
-                                    maxLength={2}
-                                    minLength={2}
-                                    onChange={cardYearChangeHandler}
-                                />
+                                <DateInputItem>
+                                    <Input
+                                        value={cardYear}
+                                        type='text'
+                                        width='90px'
+                                        placeholder='YY'
+                                        id='expDate'
+                                        maxLength={2}
+                                        minLength={2}
+                                        onChange={cardYearChangeHandler}
+                                        error={errorMessageNumberYear}
+                                        required
 
+                                    />
+
+                                    {
+                                        errorMessageNumberYear && <ErrorMessage>Wrong format</ErrorMessage>
+                                    }
+                                </DateInputItem>
                             </DateInputContainer>
                         </Label>
 
@@ -130,14 +212,20 @@ const CardForm: FC<FormProps> = ({cardData}) => {
                             <Input
                                 value={cardCVS}
                                 width='190px'
-                                type='number'
+                                type='text'
                                 id='cvs'
                                 placeholder='e.g. 123'
                                 maxLength={3}
                                 minLength={3}
                                 onChange={cardCVSChangeHandler}
+                                error={errorMessageNumberCVS}
+                                required
                             />
+                            {
+                                errorMessageNumberCVS && <ErrorMessage>Wrong format</ErrorMessage>
+                            }
                         </Label>
+
                     </Line>
 
                     <ConfirmBtn type='submit'>Confirm</ConfirmBtn>
@@ -176,6 +264,12 @@ const Label = styled.label`
 const Line = styled.div`
   display: flex;
   justify-content: space-between;
+`
+
+const ErrorMessage = styled.div`
+  display: block;
+  color: #c50404;
+  margin-bottom: 10px;
 `
 
 const ConfirmBtn = styled.button`
