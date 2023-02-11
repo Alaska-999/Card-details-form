@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import styled from "styled-components";
 import Input from "./UI/Input";
 import Submitted from "./Submitted";
@@ -12,6 +12,10 @@ interface FormProps {
 }
 
 const CardForm: FC<FormProps> = ({cardData}) => {
+
+    useEffect(() => {
+
+    }, [])
 
     const [isCardSaved, setCardSaved] = useState(false)
 
