@@ -22,11 +22,11 @@ const Input: FC<InputProps> = ({
                                    onChange,
                                    maxLength,
                                    minLength,
-error,
+                                   error,
                                    required
                                }) => {
-    return (
 
+    return (
         <InputField
             type={type}
             width={width}
@@ -34,15 +34,16 @@ error,
             onChange={onChange}
             maxLength={maxLength}
             minLength={minLength}
-            error={error}
+
             required={required}
         />
     );
 };
 
-const InputField = styled.input<{error: boolean}>`
+
+const InputField = styled.input`
   width: ${InputField => InputField.width};
-  //border: 2px solid var(--colors-light);
+  border: 2px solid var(--colors-light);
   padding: 10px 15px;
   margin: 15px 0;
   border-radius: var(--radii);
@@ -54,17 +55,12 @@ const InputField = styled.input<{error: boolean}>`
   ::placeholder {
     color: var(--colors-light);
   }
-  ${({ error }) => {
-    if (error) {
-      return 'border: 2px solid #fff';
-    }
+  &:focus {
+    border: 2px solid var(--colors-very-dark);
+  }
 
-    return 'border: 2px solid black';
-  }}
-
-  // border: 2px solid ${props => props. ? 'red' : 'blue'}
-
-
+  //border: ${error => error ? ' 2px solid red' : '2px solid var(--colors-light)'}
 `;
+
 
 export default Input;

@@ -13,9 +13,9 @@ interface FormProps {
 
 const CardForm: FC<FormProps> = ({cardData}) => {
 
-    useEffect(() => {
-
-    }, [])
+    // useEffect(() => {
+    //
+    // }, [])
 
     const [isCardSaved, setCardSaved] = useState(false)
 
@@ -112,7 +112,6 @@ const CardForm: FC<FormProps> = ({cardData}) => {
     }
 
     const submitHandler = (e: FormEvent) => {
-
         e.preventDefault()
         if (!errorMessageName && !errorMessageNumber && !errorMessageNumberMonth && !errorMessageNumberCVS && !errorMessageNumberYear) {
             setCardSaved(true)
@@ -126,7 +125,6 @@ const CardForm: FC<FormProps> = ({cardData}) => {
             {isCardSaved ?
                 <Submitted/>
                 :
-
                 <Form onSubmit={submitHandler}>
                     <Label htmlFor='cardholder'>CARDHOLDER NAME
                         <Input
@@ -200,7 +198,6 @@ const CardForm: FC<FormProps> = ({cardData}) => {
                                         required
 
                                     />
-
                                     {
                                         errorMessageNumberYear && <ErrorMessage>Wrong format</ErrorMessage>
                                     }
