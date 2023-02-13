@@ -10,7 +10,7 @@ interface InputProps {
     maxLength: number;
     minLength: number
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    error?: boolean
+    error: boolean
     required?: boolean;
 }
 
@@ -34,16 +34,15 @@ const Input: FC<InputProps> = ({
             onChange={onChange}
             maxLength={maxLength}
             minLength={minLength}
-
+            error={error}
             required={required}
         />
     );
 };
 
 
-const InputField = styled.input`
+const InputField = styled.input<{error: boolean}>`
   width: ${InputField => InputField.width};
-  border: 2px solid var(--colors-light);
   padding: 10px 15px;
   margin: 15px 0;
   border-radius: var(--radii);
@@ -51,15 +50,19 @@ const InputField = styled.input`
   font-size: 18px;
   font-family: 'Space Grotesk', sans-serif;
   max-height: 46px;
+  border: ${props => props.error ?
+          ' 2px solid red' : '2px solid var(--colors-light)'};
 
   ::placeholder {
     color: var(--colors-light);
   }
+
   &:focus {
     border: 2px solid var(--colors-very-dark);
   }
-
-  //border: ${error => error ? ' 2px solid red' : '2px solid var(--colors-light)'}
+  
+  
+ 
 `;
 
 

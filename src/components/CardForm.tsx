@@ -13,9 +13,8 @@ interface FormProps {
 
 const CardForm: FC<FormProps> = ({cardData}) => {
 
-    // useEffect(() => {
-    //
-    // }, [])
+
+
 
     const [isCardSaved, setCardSaved] = useState(false)
 
@@ -118,7 +117,9 @@ const CardForm: FC<FormProps> = ({cardData}) => {
         }
     }
 
-    cardData(cardNumber, cardHolder, cardMonth, cardYear, cardCVS)
+    useEffect(() => {
+        cardData(cardNumber, cardHolder, cardMonth, cardYear, cardCVS);
+    }, [cardCVS, cardData, cardHolder, cardMonth, cardNumber, cardYear]);
 
     return (
         <div>

@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useCallback, useState} from 'react';
 import styled from "styled-components";
 import Cards from "./Cards";
 import Form from "./CardForm";
@@ -11,19 +11,22 @@ const Content: FC = () => {
     const [cardYear, setCardYear] = useState<string>('23');
     const [cardCVS, setCardCVS] = useState<string>("");
 
-    const cardData = (
-        number: string,
-        holder: string,
-        month: string,
-        year: string,
-        cvs: string
-    ) => {
-        setCardNumber(number)
-        setCardHolder(holder)
-        setCardMonth(month)
-        setCardYear(year)
-        setCardCVS(cvs)
-    }
+    const cardData = useCallback(
+        (
+            number: string,
+            holder: string,
+            month: string,
+            year: string,
+            cvs: string
+        ) => {
+            setCardNumber(number);
+            setCardHolder(holder);
+            setCardMonth(month);
+            setCardYear(year);
+            setCardCVS(cvs);
+        },
+        []
+    );
 
     return (
         <Wrapper>
